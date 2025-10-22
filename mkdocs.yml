@@ -23,6 +23,11 @@ theme:
         icon: material/brightness-4
         name: Switch to light mode
 
+# Extra configuration
+extra:
+  auth_username: "testuser"  # Default fallback, will be overridden by secrets
+  auth_password: "testpass"  # Default fallback, will be overridden by secrets
+
 # Navigation
 nav:
   - Home: index.md
