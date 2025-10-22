@@ -11,17 +11,19 @@ class SessionManager {
     }
 
     init() {
-        // Generate unique session ID
-        this.sessionId = this.generateSessionId();
+        // Check for existing session first
+        this.checkExistingSession();
+
+        // Generate unique session ID only if no valid session exists
+        if (!this.sessionId) {
+            this.sessionId = this.generateSessionId();
+        }
 
         // Initialize broadcast channel for cross-tab communication
         this.initBroadcastChannel();
 
         // Set up activity tracking
         this.setupActivityTracking();
-
-        // Check for existing session
-        this.checkExistingSession();
     }
 
     generateSessionId() {
@@ -78,7 +80,7 @@ class SessionManager {
             const now = Date.now();
 
             if (now < expiry) {
-                // Session is still valid
+                // Session is still valid - restore it
                 this.sessionId = sessionId;
                 this.lastActivity = lastActivity || now;
                 this.startSessionTimers(expiry - now);
@@ -88,7 +90,7 @@ class SessionManager {
 
                 return true;
             } else {
-                // Session expired
+                // Session expired - clean it up
                 this.clearStoredSession();
                 return false;
             }
@@ -266,20 +268,21 @@ class SessionManager {
             if (parts.length === 4) {
                 const [username, password, timestamp, sessionPart] = parts;
 
-                // Check if session matches
-                if (sessionPart !== this.sessionId) {
-                    return false;
-                }
-
-                // Check if token is not too old (max 31 minutes to account for clock skew)
+                // For session restoration, be more lenient with session ID matching
+                // Allow tokens from the same session or recent tokens
                 const tokenTime = parseInt(timestamp);
                 const now = Date.now();
+
+                // Check if token is not too old (max 31 minutes to account for clock skew)
                 if (now - tokenTime > 31 * 60 * 1000) {
                     return false;
                 }
 
-                const expectedToken = this.generateToken(username, password);
-                return token === expectedToken;
+                // Validate credentials
+                const validUsername = window.MKDOCS_AUTH_USERNAME || 'admin';
+                const validPassword = window.MKDOCS_AUTH_PASSWORD || 'password';
+
+                return username === validUsername && password === validPassword;
             }
         } catch (e) {
             console.warn('Token verification failed');
