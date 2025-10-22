@@ -31,14 +31,35 @@ DOCS_PASSWORD = mySecurePassword2025!
 1. **Build Time**: During GitHub Actions deployment, the credentials are securely injected into the HTML
 2. **Runtime**: When users visit the site, they're prompted for login
 3. **Authentication**: Credentials are validated client-side against the injected values
-4. **Session**: Successful login creates a 24-hour session stored in browser localStorage
+4. **Session**: Successful login creates a 30-minute session stored in browser localStorage
+
+## Advanced Session Management
+
+The authentication system now includes advanced session management features:
+
+### Session Features
+- **Activity Tracking**: Monitors user activity (mouse, keyboard, touch) and extends session automatically
+- **Renewal Warnings**: Shows a warning 5 minutes before session expiry with option to extend
+- **Cross-Tab Sync**: Sessions are synchronized across multiple browser tabs/windows
+- **Automatic Expiry**: Sessions expire after 30 minutes of inactivity
+- **Secure Tokens**: Enhanced token generation with session-specific identifiers
+
+### Session Behavior
+- Login once, stay authenticated across all tabs
+- Session automatically extends when user is active
+- Warning appears before session expires
+- Logout in one tab logs out all tabs
+- Sessions expire on browser close (localStorage behavior)
 
 ## Security Features
 
 - ✅ Credentials stored securely in GitHub Secrets (not in code)
 - ✅ Client-side authentication with session management
 - ✅ Protection against right-click, keyboard shortcuts, and drag operations
-- ✅ 30-minute session timeout
+- ✅ 30-minute session timeout with activity tracking
+- ✅ Session renewal warnings (5 minutes before expiry)
+- ✅ Cross-tab session synchronization
+- ✅ Automatic session expiry on inactivity
 - ✅ Dark mode compatible login interface
 
 ## Default Fallback
