@@ -57,6 +57,9 @@ jobs:
           mkdocs build --clean
 
       - name: Inject credentials
+        env:
+          DOCS_USERNAME: ${{ secrets.DOCS_USERNAME }}
+          DOCS_PASSWORD: ${{ secrets.DOCS_PASSWORD }}
         run: |
           # Replace default credentials with secrets if provided
           find site -name "*.html" -exec sed -i "s/\"testuser\"/\"${DOCS_USERNAME:-admin}\"/g" {} \;
