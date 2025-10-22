@@ -1,1 +1,36 @@
-site_name: My Docs
+site_name: Simtestlab Documentation
+site_description: Documentation for Simtestlab project
+site_author: Simtestlab
+site_url: https://simtestlab.github.io/simtestlab/
+
+# Repository
+repo_name: Simtestlab/simtestlab
+repo_url: https://github.com/Simtestlab/simtestlab
+
+# Theme
+theme:
+  name: material
+  palette:
+    # Palette toggle for light mode
+    - scheme: default
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    # Palette toggle for dark mode
+    - scheme: slate
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+
+# Navigation
+nav:
+  - Home: index.md
+
+# Extensions
+markdown_extensions:
+  - pymdownx.highlight
+  - pymdownx.superfences
+  - pymdownx.tabbed:
+      alternate_style: true
+  - admonition
+  - pymdownx.details
