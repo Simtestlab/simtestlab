@@ -52,7 +52,16 @@ jobs:
         uses: actions/configure-pages@v5
 
       - name: Build with MkDocs
-        run: mkdocs build --clean
+        env:
+          MKDOCS_AUTH_USERNAME: ${{ secrets.DOCS_USERNAME }}
+          MKDOCS_AUTH_PASSWORD: ${{ secrets.DOCS_PASSWORD }}
+        run: |
+          # Set default credentials if secrets are not provided
+          export MKDOCS_AUTH_USERNAME="${MKDOCS_AUTH_USERNAME:-admin}"
+          export MKDOCS_AUTH_PASSWORD="${MKDOCS_AUTH_PASSWORD:-password}"
+
+          # Build with credentials
+          mkdocs build --clean
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3

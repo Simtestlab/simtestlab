@@ -10,6 +10,7 @@ repo_url: https://github.com/Simtestlab/simtestlab
 # Theme
 theme:
   name: material
+  custom_dir: docs/overrides
   palette:
     # Palette toggle for light mode
     - scheme: default
@@ -21,6 +22,11 @@ theme:
       toggle:
         icon: material/brightness-4
         name: Switch to light mode
+
+# Extra configuration
+extra:
+  auth_username: "admin"  # Default fallback, will be overridden by secrets
+  auth_password: "password"  # Default fallback, will be overridden by secrets
 
 # Navigation
 nav:
@@ -37,3 +43,9 @@ markdown_extensions:
   - pymdownx.details
   - plantuml_markdown:
       server: http://www.plantuml.com/plantuml
+
+# Custom JavaScript and CSS
+extra_javascript:
+  - js/auth.js
+extra_css:
+  - css/auth.css

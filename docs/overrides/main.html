@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+
+{% block htmltitle %}
+{{ super() }}
+<script>
+  // Authentication credentials injected during build
+  window.MKDOCS_AUTH_USERNAME = "{{ config.extra.auth_username | default('admin') }}";
+  window.MKDOCS_AUTH_PASSWORD = "{{ config.extra.auth_password | default('password') }}";
+</script>
+{% endblock %}
