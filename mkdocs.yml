@@ -25,6 +25,7 @@ theme:
 # Navigation
 nav:
   - Home: index.md
+  - Diagrams: diagrams.md
 
 # Extensions
 markdown_extensions:
@@ -34,3 +35,5 @@ markdown_extensions:
       alternate_style: true
   - admonition
   - pymdownx.details
+  - plantuml_markdown:
+      server: http://www.plantuml.com/plantuml
