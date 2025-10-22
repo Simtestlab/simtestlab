@@ -52,16 +52,15 @@ jobs:
         uses: actions/configure-pages@v5
 
       - name: Build with MkDocs
-        env:
-          MKDOCS_AUTH_USERNAME: ${{ secrets.DOCS_USERNAME }}
-          MKDOCS_AUTH_PASSWORD: ${{ secrets.DOCS_PASSWORD }}
         run: |
-          # Set default credentials if secrets are not provided
-          export MKDOCS_AUTH_USERNAME="${MKDOCS_AUTH_USERNAME:-admin}"
-          export MKDOCS_AUTH_PASSWORD="${MKDOCS_AUTH_PASSWORD:-password}"
-
-          # Build the site with authentication
+          # Build the site
           mkdocs build --clean
+
+      - name: Inject credentials
+        run: |
+          # Replace default credentials with secrets if provided
+          find site -name "*.html" -exec sed -i "s/\"testuser\"/\"${DOCS_USERNAME:-admin}\"/g" {} \;
+          find site -name "*.html" -exec sed -i "s/\"testpass\"/\"${DOCS_PASSWORD:-password}\"/g" {} \;
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
