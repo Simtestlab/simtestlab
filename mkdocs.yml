@@ -25,8 +25,8 @@ theme:
 
 # Extra configuration
 extra:
-  auth_username: "admin"  # Default fallback, will be overridden by secrets
-  auth_password: "password"  # Default fallback, will be overridden by secrets
+  auth_username: "testuser"  # Default fallback, will be overridden by secrets
+  auth_password: "testpass"  # Default fallback, will be overridden by secrets
 
 # Navigation
 nav:

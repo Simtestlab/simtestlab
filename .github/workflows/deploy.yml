@@ -60,7 +60,13 @@ jobs:
           export MKDOCS_AUTH_USERNAME="${MKDOCS_AUTH_USERNAME:-admin}"
           export MKDOCS_AUTH_PASSWORD="${MKDOCS_AUTH_PASSWORD:-password}"
 
-          # Build with credentials
+          # Create a temporary mkdocs.yml with injected credentials
+          cp mkdocs.yml mkdocs.yml.tmp
+          sed -i "s/auth_username: \".*\"/auth_username: \"$MKDOCS_AUTH_USERNAME\"/" mkdocs.yml.tmp
+          sed -i "s/auth_password: \".*\"/auth_password: \"$MKDOCS_AUTH_PASSWORD\"/" mkdocs.yml.tmp
+
+          # Build with the modified config
+          mv mkdocs.yml.tmp mkdocs.yml
           mkdocs build --clean
 
       - name: Upload artifact
