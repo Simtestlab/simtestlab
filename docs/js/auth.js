@@ -129,7 +129,7 @@ class AuthManager {
             if (this.validateCredentials(username, password)) {
                 // Generate and store token
                 const token = this.generateToken(username, password);
-                const expiry = new Date().getTime() + (24 * 60 * 60 * 1000); // 24 hours
+                const expiry = new Date().getTime() + (30 * 60 * 1000); // 30 minutes
 
                 localStorage.setItem('mkdocs_auth_token', token);
                 localStorage.setItem('mkdocs_auth_expiry', expiry.toString());

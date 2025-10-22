@@ -38,7 +38,7 @@ DOCS_PASSWORD = mySecurePassword2025!
 - ✅ Credentials stored securely in GitHub Secrets (not in code)
 - ✅ Client-side authentication with session management
 - ✅ Protection against right-click, keyboard shortcuts, and drag operations
-- ✅ 24-hour session timeout
+- ✅ 30-minute session timeout
 - ✅ Dark mode compatible login interface
 
 ## Default Fallback
